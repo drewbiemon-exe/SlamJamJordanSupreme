@@ -3,22 +3,36 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | I don't fucking know, dude</title>
+    <title>Unity WebGL Player | SlamJamJordanSupreme</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <script src="TemplateData/UnityProgress.js"></script>  
     <script src="Build/UnityLoader.js"></script>
     <script>
-      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/WebFinish.json", {onProgress: UnityProgress});
+      // MODIFICATION 1: Define the variable, but DO NOT start the game yet
+      var gameInstance;
+
+      // MODIFICATION 2: This function runs only when you click the button
+      function startSlamJam() {
+          // Hide the overlay button
+          document.getElementById("loadingOverlay").style.display = "none";
+
+          // NOW we start Unity. Because this is inside a "click" event, 
+          // the browser will allow the audio to play!
+          gameInstance = UnityLoader.instantiate("gameContainer", "Build/WebTest5.json", {onProgress: UnityProgress});
+      }
     </script>
   </head>
   <body>
-    <div class="webgl-content">
+    <div class="webgl-content" style="position: relative;"> <div id="loadingOverlay" onclick="startSlamJam()" style="position:absolute; width: 960px; height: 600px; background:black; display:flex; justify-content:center; align-items:center; z-index:100; cursor:pointer;">
+           <h1 style="color:white; font-family:sans-serif; border: 4px solid white; padding: 20px; text-transform: uppercase;">Click to Slam</h1>
+      </div>
+
       <div id="gameContainer" style="width: 960px; height: 600px"></div>
       <div class="footer">
         <div class="webgl-logo"></div>
-        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
-        <div class="title">I don't fucking know, dude</div>
+        <div class="fullscreen" onclick="if(gameInstance) gameInstance.SetFullscreen(1)"></div>
+        <div class="title">SlamJamJordanSupreme</div>
       </div>
     </div>
   </body>
