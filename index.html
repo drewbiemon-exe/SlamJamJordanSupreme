@@ -9,26 +9,29 @@
     <script src="TemplateData/UnityProgress.js"></script>  
     <script src="Build/UnityLoader.js"></script>
     <script>
-      // MODIFICATION 1: Define the variable, but DO NOT start the game yet
       var gameInstance;
 
-      // MODIFICATION 2: This function runs only when you click the button
       function startSlamJam() {
-          // Hide the overlay button
-          document.getElementById("loadingOverlay").style.display = "none";
-
-          // NOW we start Unity. Because this is inside a "click" event, 
-          // the browser will allow the audio to play!
+          // Unity will automatically clear the "Click to Slam" button 
+          // when it loads the game into the container.
+          // Make sure "Build/WebTest5.json" matches your actual file name!
           gameInstance = UnityLoader.instantiate("gameContainer", "Build/WebTest5.json", {onProgress: UnityProgress});
       }
     </script>
   </head>
   <body>
-    <div class="webgl-content" style="position: relative;"> <div id="loadingOverlay" onclick="startSlamJam()" style="position:absolute; width: 960px; height: 600px; background:black; display:flex; justify-content:center; align-items:center; z-index:100; cursor:pointer;">
-           <h1 style="color:white; font-family:sans-serif; border: 4px solid white; padding: 20px; text-transform: uppercase;">Click to Slam</h1>
+    <div class="webgl-content">
+      
+      <div id="gameContainer" style="width: 960px; height: 600px">
+          
+          <div title="Click to Play" onclick="startSlamJam()" style="width: 100%; height: 100%; background-color: black; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+              <h1 style="color: white; font-family: sans-serif; border: 4px solid white; padding: 20px; text-transform: uppercase; user-select: none;">
+                  Click to Slam
+              </h1>
+          </div>
+
       </div>
 
-      <div id="gameContainer" style="width: 960px; height: 600px"></div>
       <div class="footer">
         <div class="webgl-logo"></div>
         <div class="fullscreen" onclick="if(gameInstance) gameInstance.SetFullscreen(1)"></div>
